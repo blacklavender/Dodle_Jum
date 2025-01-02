@@ -1,4 +1,5 @@
 #Dodle Jump
+#Created by Suraj Saripalli
 
 import pygame
 import time

@@ -66,13 +66,13 @@ def objects():
     dodle_man = Dodle_man("dodle_man.png", 0.5, og_man_x, og_man_y)
     jums = pygame.sprite.Group()
     jum = Jums("jums.png", 0.125, og_x, og_y)
-    jum1 = Jums("jums.png", 0.125, random.randint(150,250), random.randint(570,580))
-    jum2 = Jums("jums.png", 0.125, random.randint(400,500), random.randint(480,490))
-    jum3 = Jums("jums.png", 0.125, random.randint(700,800), random.randint(525,550))
-    jum4 = Jums("jums.png", 0.125, random.randint(900,1000), random.randint(400,500))
-    jum5 = Jums("jums.png", 0.125, random.randint(1000,1100), random.randint(300,400))
+    jum1 = Jums("jums.png", 0.125, random.randint(0,350), random.randint(570,580))
+    jum2 = Jums("jums.png", 0.125, random.randint(400,600), random.randint(480,500))
+    jum3 = Jums("jums.png", 0.125, random.randint(700,1000), random.randint(525,550))
+    jum4 = Jums("jums.png", 0.125, random.randint(900,1200), random.randint(400,500))
+    jum5 = Jums("jums.png", 0.125, random.randint(1000,1250), random.randint(300,600))
     jum6 = Jums("jums.png", 0.125, random.randint(700,1000), random.randint(200, 300))
-    jum7 = Jums("jums.png", 0.125, random.randint(500,900), random.randint(150,200))
+    jum7 = Jums("jums.png", 0.125, random.randint(500,1000), random.randint(150,200))
     jum8 = Jums("jums.png", 0.125, random.randint(500,1000), random.randint(50, 100))
     jums.add(jum, jum1, jum2, jum3, jum4, jum5, jum6, jum7, jum8)
     sprites = pygame.sprite.Group()
@@ -91,8 +91,8 @@ while gaming == True:
             gaming = False
             
     if up:
-        dodle_man.collision_rect.y -= 85
-        dodle_man.rect.y -= 85
+        dodle_man.collision_rect.y -= 100
+        dodle_man.rect.y -= 100
         up = False
         down = True
     

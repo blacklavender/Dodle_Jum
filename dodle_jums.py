@@ -91,8 +91,8 @@ while gaming == True:
             gaming = False
             
     if up:
-        dodle_man.collision_rect.y -= 75
-        dodle_man.rect.y -= 75
+        dodle_man.collision_rect.y -= 85
+        dodle_man.rect.y -= 85
         up = False
         down = True
     
@@ -115,7 +115,9 @@ while gaming == True:
     
     if bottom.y < -35:
         dodle_man.rect.x = og_man_x
+        dodle_man.collision_rect.x = og_man_x
         dodle_man.rect.y = og_man_y
+        dodle_man.collision_rect.y = og_man_y
         time.sleep(1)
         jums, sprites, dodle_man = objects()
         

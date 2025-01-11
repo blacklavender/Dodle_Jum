@@ -11,6 +11,8 @@ pygame.display.set_caption("Dodle Jums")
 pos = (15, 960)
 bg = pygame.image.load("dodle.png")
 womp = pygame.image.load("wompwomp.jpg").convert_alpha()
+loading_bg  = pygame.image.load("loading.jpg")
+halp = pygame.image.load("halp.jpeg")
 clock = pygame.time.Clock()
 og_x = 0
 og_y = 700
@@ -22,8 +24,13 @@ jumper = 75
 score = 0
 font = pygame.font.Font(None, 256)
 
-s.blit(bg, (0,0))
-gaming = True
+s.blit(halp, (0,0))
+pygame.display.flip()
+time.sleep(5)
+s.blit(loading_bg, (0,0))
+pygame.display.flip()
+gaming = False
+loading = True
     
 def hitboxes(jums):
     global dodle_man
@@ -67,12 +74,12 @@ def objects():
     jums = pygame.sprite.Group()
     jum = Jums("jums.png", 0.125, og_x, og_y)
     jum1 = Jums("jums.png", 0.125, random.randint(0,350), random.randint(570,580))
-    jum2 = Jums("jums.png", 0.125, random.randint(400,600), random.randint(480,500))
+    jum2 = Jums("jums.png", 0.125, random.randint(300,500), random.randint(480,500))
     jum3 = Jums("jums.png", 0.125, random.randint(700,1000), random.randint(525,550))
     jum4 = Jums("jums.png", 0.125, random.randint(900,1200), random.randint(400,500))
-    jum5 = Jums("jums.png", 0.125, random.randint(1000,1250), random.randint(300,600))
-    jum6 = Jums("jums.png", 0.125, random.randint(700,1000), random.randint(200, 300))
-    jum7 = Jums("jums.png", 0.125, random.randint(500,1000), random.randint(150,200))
+    jum5 = Jums("jums.png", 0.125, random.randint(1000,1250), random.randint(400, 600))
+    jum6 = Jums("jums.png", 0.125, random.randint(700,1000), random.randint(275, 300))
+    jum7 = Jums("jums.png", 0.125, random.randint(500,1000), random.randint(150, 250))
     jum8 = Jums("jums.png", 0.125, random.randint(500,1000), random.randint(50, 100))
     jums.add(jum, jum1, jum2, jum3, jum4, jum5, jum6, jum7, jum8)
     sprites = pygame.sprite.Group()
@@ -83,7 +90,27 @@ def objects():
 
 jums, sprites, dodle_man = objects()
 
+
+
+
+while loading == True:
+    for event in pygame.event.get():
+        if event.type == pygame.QUIT:
+            loading = False
+    
+    start = pygame.key.get_pressed()
+    if start[pygame.K_s]:
+        loading = False
+        gaming = True
+
+    s.blit(loading_bg, (0,0))
+    pygame.display.flip()
+    clock.tick(50)
+
+
+
 while gaming == True:
+    s.blit(bg, (0,0))
     bottom = pygame.Rect(dodle_man.collision_rect.left, dodle_man.collision_rect.bottom, dodle_man.collision_rect.width, 1)
 
     for event in pygame.event.get():
@@ -112,6 +139,7 @@ while gaming == True:
         pygame.display.flip()
         time.sleep(2)
         gaming = False
+        pygame.quit()
     
     if bottom.y < -35:
         dodle_man.rect.x = og_man_x
@@ -128,10 +156,12 @@ while gaming == True:
     if keys[pygame.K_LEFT]:
         dodle_man.collision_rect.x -= 10
         dodle_man.rect.x -= 10
+    if keys[pygame.K_ESCAPE]:
+        loading = True
+        gaming = False
             
     s.blit(bg, (0,0))
     sprites.draw(s)
     pygame.display.flip()
     clock.tick(50)
     
-pygame.quit()
